@@ -1,0 +1,15 @@
+name: Build
+run-name: ${{github.actor}} trigger build by ${{github.event}} code
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+            node-version: '20'
+      - run: |
+            npm install -g pnpm 
+            && pnpm install --frozen-lockfile
+      - run: pnpm run build
