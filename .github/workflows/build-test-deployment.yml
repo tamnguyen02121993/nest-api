@@ -1,4 +1,4 @@
-name: Build
+name: Build - Test - Deployment
 run-name: ${{github.actor}} trigger build
 on: 
   push:
