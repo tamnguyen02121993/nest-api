@@ -1,6 +1,9 @@
 name: Build
-run-name: ${{github.actor}} trigger build by ${{github.event}} code
-on: [push]
+run-name: ${{github.actor}} trigger build
+on: 
+  push:
+    branches:
+      - main
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -13,3 +16,10 @@ jobs:
             npm install -g pnpm &&
             pnpm install --frozen-lockfile
       - run: pnpm run build
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Run test
+        run: |
+          pnpm run test:cov
