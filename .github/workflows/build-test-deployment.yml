@@ -10,15 +10,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      # - name: Install Nodejs
-      #   uses: actions/setup-node@v4
-      #   with:
-      #       node-version: '20'
-      # - name: Install pnpm
-      #   run: |
-      #       npm install -g pnpm &&
-      #       pnpm install --frozen-lockfile
-      - name: Pull and build
+      - name: Setup
         uses: ./.github/actions/setup-action
       - name: Run build
         run: pnpm run build
@@ -28,14 +20,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Install Nodejs
-        uses: actions/setup-node@v4
-        with:
-            node-version: '20'
-      - name: Install pnpm
-        run: |
-            npm install -g pnpm &&
-            pnpm install --frozen-lockfile
+      - name: Setup
+        uses: ./.github/actions/setup-action
       - name: Run test
         run: |
           pnpm run test:cov
@@ -66,7 +52,7 @@ jobs:
 
       - name: Build and push Docker image
         id: push
-        uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
+        uses: docker/build-push-action@v6
         with:
           context: .
           file: ./Dockerfile
@@ -74,11 +60,11 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
-      # - name: Generate artifact attestation
-      #   uses: actions/attest-build-provenance@v1
-      #   with:
-      #     subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME}}
-      #     subject-digest: ${{ steps.push.outputs.digest }}
-      #     push-to-registry: true
+      - name: Generate artifact attestation
+        uses: actions/attest-build-provenance@v1
+        with:
+          subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME}}
+          subject-digest: ${{ steps.push.outputs.digest }}
+          push-to-registry: true
       
 
