@@ -19,7 +19,7 @@ jobs:
       #       npm install -g pnpm &&
       #       pnpm install --frozen-lockfile
       - name: Pull and build
-        uses: ./actions/pill-build-action
+        uses: ./actions/pull-build-action
       - name: Run build
         run: pnpm run build
   test:
