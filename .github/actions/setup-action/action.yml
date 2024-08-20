@@ -1,10 +1,8 @@
-name: 'Pull and build'
-description: 'Pull and build source code'
+name: 'Setup action'
+description: 'Set up source code'
 runs:
   using: 'composite'
   steps:
-    - name: Checkout code
-        uses: actions/checkout@v4
     - name: Install Nodejs
       uses: actions/setup-node@v4
       with:

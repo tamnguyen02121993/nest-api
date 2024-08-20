@@ -8,8 +8,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      # - name: Checkout code
-      #   uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
       # - name: Install Nodejs
       #   uses: actions/setup-node@v4
       #   with:
@@ -19,7 +19,7 @@ jobs:
       #       npm install -g pnpm &&
       #       pnpm install --frozen-lockfile
       - name: Pull and build
-        uses: ./.github/actions/pull-build-action
+        uses: ./.github/actions/setup-action
       - name: Run build
         run: pnpm run build
   test:
