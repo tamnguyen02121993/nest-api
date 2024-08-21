@@ -6,20 +6,20 @@ import { User } from './entities';
 
 @Module({
   imports: [
-    TypeOrmModule.forRootAsync({
-      useFactory() {
-        return {
-          type: 'postgres',
-          host: 'localhost',
-          port: 5432,
-          username: 'postgres',
-          password: 'postgres',
-          database: 'migration',
-          entities: [User],
-          // synchronize: true,
-        }
-      }
-    })
+    // TypeOrmModule.forRootAsync({
+    //   useFactory() {
+    //     return {
+    //       type: 'postgres',
+    //       host: 'localhost',
+    //       port: 5432,
+    //       username: 'postgres',
+    //       password: 'postgres',
+    //       database: 'migration',
+    //       entities: [User],
+    //       // synchronize: true,
+    //     }
+    //   }
+    // })
   ],
   controllers: [AppController],
   providers: [AppService],
